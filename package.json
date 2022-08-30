@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "axios": "^0.27.2",
-    "create-react-app": "^5.0.1",
-    "pokedex": "^1.1.0",
-    "react-router-dom": "^6.3.0",
-    "styled-components": "^5.3.5"
-  }
-}
