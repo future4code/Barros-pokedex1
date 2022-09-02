@@ -1,11 +1,13 @@
+import React from "react";
 import Router from "./routes/Router";
+import GlobalState from "./context/GlobalState"
 
 
 function App() {
   return (
-    <div>
+    <GlobalState>
       <Router/>
-    </div>
+    </GlobalState>
   );
 }
 
