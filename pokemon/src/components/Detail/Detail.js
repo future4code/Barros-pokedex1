@@ -1,23 +1,42 @@
-import { useNavigate } from "react-router-dom";
+import React,{useState, useEffect} from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { homePage, pokedexPage } from "../../routes/coordinator";
 import { Header, ContainerDetails, ContainerPhotos, Stats } from "./styled";
 import Logo from "../Home/image/pokemon-logo.png"
 import Pokebola from "../Home/image/129-1298368_ref-pokeball-transparent-background.png"
 import Background from "./images/pngwing.com.png"
-import PokemonFront from "./images/bubassour.png"
-import PokemonBack from "./images/bubassour_back.png"
+// import PokemonFront from "./images/bubassour.png"
+// import PokemonBack from "./images/bubassour_back.png"
 
 
 
 const Details=()=>{
     const navigate=useNavigate();
+    const [selectPoke, setSelectPoke] = useState({})
+
+    const name = useParams();
+    console.log(name)
+
+    const getDetailsPoke = () => {
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${name.name}/`)
+            .then((res) => {
+                setSelectPoke(res.data)
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    };
+    useEffect(() => { getDetailsPoke() }, [])
 
 
     return(
         <>
     <Header>
       <img onClick={() => homePage (navigate)} src={Logo}/>
-      <h1>NOME DO POKEMON</h1>
+      <h1>{selectPoke && selectPoke.name}</h1>
       <div onClick={() => pokedexPage (navigate)}>
         <img src={Pokebola}/>
         <p>Pokedex</p>
@@ -26,41 +45,56 @@ const Details=()=>{
             <ContainerDetails
             back = {Background}
             >
-                {/* <h1>PAGINA DETALHES</h1> */}
-                {/* <button onClick={() => homePage(navigate)}>HOME</button>
-                <button onClick={() => pokedexPage(navigate)}>POKEDEX</button> */}
                 <ContainerPhotos>
                     <div>
-                        <img src={PokemonFront} />
+                    <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} />
                     </div>
                     <div>
-                        <img src={PokemonBack} />
+                    <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} />
                     </div>
                 </ContainerPhotos>
 
                 <Stats>
                     <div>
                         <h2>Stats</h2>
-                        <ul>
-                            <li><strong>HP:</strong> 46</li>
-                            <li><strong>Attack:</strong> 39</li>
-                            <li><strong>Defense:</strong> 52</li>
-                            <li><strong>Special-Attack:</strong> 43</li>
-                            <li><strong>Special-defense:</strong> 54</li>
-                            <li><strong>Speed:</strong> 54</li>
-                        </ul>
+                        {
+                        selectPoke.stats && selectPoke.stats.map((stat) => {
+                            return (
+                                <div key={stat.stat.name}>
+                                    <strong> {stat.stat.name}: </strong> <p>{stat.base_stat}</p>
+                                </div>
+                            )
+                        })
+                    }
                     </div>
+                    
                     <div>
-                        <p>Type 1</p>
-                        <p>Type 2</p>
+                    <h3>Tipo</h3>
+                        {
+                            selectPoke.types && selectPoke.types.map((type) => {
+                                return (
+                                    <div key={type.type.name}>
+                                        <p> {type.type.name} </p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
+                   
                     <div>
                         <h2>Moves</h2>
-                        <ul>
-                            <li>Move name 1</li>
-                            <li>Move name 2</li>
-                            <li>Move name 3</li>
-                        </ul>
+                        {
+                            selectPoke.moves && selectPoke.moves.map((move,index) => {
+                                if (index <= 3 && selectPoke.moves.length ) {
+                                return (
+                                        <div key={move.move.name}>
+                                            <p> {move.move.name} </p>
+                                        </div>
+                                    
+
+                                )}
+                        })
+                        }
                     </div>
                 </Stats>
 

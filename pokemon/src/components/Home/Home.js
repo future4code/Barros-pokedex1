@@ -1,14 +1,19 @@
-import { pokedexPage } from "../../routes/coordinator";
+import React,{useContext} from "react";
+import { pokedexPage, detailPage } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
-
-import * as style from "../Home/styled"
-import background from "../Home/image/pokemon-logo.png"
-import btnBackGround from "../Home/image/129-1298368_ref-pokeball-transparent-background.png"
+import { PokContext } from "../../context/Context";
+import * as style from "../Home/styled";
+import background from "../Home/image/pokemon-logo.png";
+import btnBackGround from "../Home/image/129-1298368_ref-pokeball-transparent-background.png";
+import GlobalContext from "../../context/GlobalState";
 
 
 const Home=()=>{
   const navigate = useNavigate();
 
+  //chamando o GlobalState
+  const {pokemons20, photosPokemons} = useContext(PokContext, GlobalContext)
+  console.log(photosPokemons)
 
   return(
   <style.ContainerHome>
@@ -23,16 +28,19 @@ const Home=()=>{
     <style.Main>
       <style.Card>
         <p>texto</p>
-        <style.Button>adicionar</style.Button>
-        <style.Button>detalhes</style.Button>
+        {
+             photosPokemons && photosPokemons.map((poke)=>{
+                return (<div>
+                  <h1 key = {poke.name}>{poke.name}</h1>
+                  <img src={poke.sprites.front_default}/>
+                  <style.Button>adicionar</style.Button>
+                  <style.Button  onClick={() =>detailPage (navigate, poke.name)}>Detalhes</style.Button>
+                </div>  
+              )})
+            }      
+        
       </style.Card>
-      <style.Card>2</style.Card>
-      <style.Card>3</style.Card>
-      <style.Card>4</style.Card>
-      <style.Card>5</style.Card>
-      <style.Card>6</style.Card>
-      <style.Card>7</style.Card>
-      <style.Card>7</style.Card>
+      
     </style.Main>
   </style.ContainerHome>
   )
