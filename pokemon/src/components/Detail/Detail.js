@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { homePage, pokedexPage } from "../../routes/coordinator";
 import { Header, ContainerDetails, ContainerPhotos, Stats } from "./styled";
 import Logo from "../Home/image/pokemon-logo.png"
-import Pokebola from "../Home/image/129-1298368_ref-pokeball-transparent-background.png"
+import Pokebola from "../Home/image/129-1298368_ref-pokeball.png"
 import Background from "./images/pngwing.com.png"
 // import PokemonFront from "./images/bubassour.png"
 // import PokemonBack from "./images/bubassour_back.png"
