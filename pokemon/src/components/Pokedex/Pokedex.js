@@ -11,46 +11,47 @@ import * as style from "../Card/styleCard"
 
 const Pokedex=()=>{
   const navigate=useNavigate();
-  const [newPokemons , setNewPokemons] = useState([]) ;
-  const listPokedex = JSON.parse(localStorage.getItem("listPokedex"));
-  // const feijao = JSON.parse(localStorage.getItem("removed"))
-  console.log(listPokedex)
+  // ABaixo recebe os pokemons do localStorage pokedex
+  const [pokemonsPokedex , setPokemonsPokedex] = useState([]); 
+  // Abaixo recebe os pokemons do localStorage listPokemonHome, essa variavel é precisa para atualizar o localStorage
+  const [pokemonHome, setPokemonHome] = useState([])
+  // ABaixo é so uma variavel para atualizar a lista de pokemons sempre que clicar no botao de remover
+  const [refreshScreen, setRefreshScreen] = useState(0)
+
+  // ListoPokedex é oque manda o valor para o PokemonsPokedex
+  const listPokedex = JSON.parse(localStorage.getItem("listPokedex")); 
+  const listPokemonHome = JSON.parse(localStorage.getItem("pokemonHome"));
+  console.log(pokemonHome)
 
   useEffect( ()=>{
-    // if(newPokemons.length > 0){
-    //   return  setNewPokemons(feijao)    
-    // }
     if(listPokedex !== null) {
-      setNewPokemons(listPokedex);
+      setPokemonsPokedex(listPokedex);
     }
-  },[setNewPokemons])
+    if(listPokemonHome !== null){
+      return setPokemonHome(listPokemonHome)
+    }
+  },[refreshScreen]);
 
-  const removePokemon = (indexPokemon) => {
-    listPokedex.filter( (poke,index) => {
-      if(index === indexPokemon) {      
-        let test5 = listPokedex.splice(indexPokemon,1);     
-        localStorage.setItem("removed",JSON.stringify(test5)) ;
-        setNewPokemons(newPokemons);
-        console.log("entrou na funcao")
+  let addToListPkmHome;
+  const removePokemon = (pokemon,indexPokemon) => {
+    setRefreshScreen(refreshScreen+1);
+    let newListAffterRemove = [...pokemonsPokedex];
+    pokemonsPokedex.filter( (poke) => {
+      if(poke.name === pokemon.name) {  
+        addToListPkmHome = [...pokemonHome,pokemon]    
+        newListAffterRemove.splice(indexPokemon,1);     
+        localStorage.setItem("listPokedex",JSON.stringify(newListAffterRemove));
+        setPokemonsPokedex(newListAffterRemove);
       }
-    })
+    });
+    setPokemonHome(addToListPkmHome);
+    localStorage.setItem("pokemonHome",JSON.stringify(addToListPkmHome));
   };
-
-  const addpokemon = (indexPokemon) => {
-    listPokedex.filter( (poke,index) => {
-      if(index === indexPokemon) {
-        listPokedex.push(poke); 
-        localStorage.setItem("newPokemon",JSON.stringify(listPokedex));   
-        console.log("entrou na funcao");
-      }
-    })
-  };
-
     
   return(
   <>
     <Header/> 
-    {listPokedex !== null && listPokedex.length > 0  && newPokemons.length < 1 ? listPokedex.map((poke,index)=>{
+    {listPokedex !== null && listPokedex.length > 0  && pokemonsPokedex.length < 1 ? listPokedex.map((poke,index)=>{
       return (
         <style.Card 
           key={poke.name}
@@ -63,13 +64,13 @@ const Pokedex=()=>{
           <style.Img src={poke.sprites.other.home.front_default}/>
           <style.NamePkm >{poke.name}</style.NamePkm>
           <style.DivBtn>
-            {/* <style.Button  onClick={ () => {removePokemon(index);addpokemon(index)}}>remover</style.Button> */}
+            <style.Button  onClick={ () => removePokemon(poke,index)}>remover</style.Button>
             <style.Button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</style.Button>
           </style.DivBtn>
         </style.Card> 
       )}) 
     : // aqui é o else  
-    newPokemons.map((poke,index)=>{
+    pokemonsPokedex.map((poke,index)=>{
       return (
         <style.Card 
           key={poke.name}
@@ -82,7 +83,7 @@ const Pokedex=()=>{
           <style.Img src={poke.sprites.other.home.front_default}/>
           <style.NamePkm >{poke.name}</style.NamePkm>
           <style.DivBtn>
-            {/* <style.Button  onClick={ () => removePokemon(index)}>remover</style.Button> */}
+            <style.Button  onClick={ () => removePokemon(poke,index)}>remover</style.Button>
             <style.Button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</style.Button>
           </style.DivBtn>
         </style.Card> )})
@@ -96,3 +97,7 @@ const Pokedex=()=>{
 };
 
 export default Pokedex;
+
+// if(newPokemons.length > 0){
+    //   return  setNewPokemons(feijao)    
+    // }

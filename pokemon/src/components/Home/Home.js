@@ -31,7 +31,8 @@ const Home=()=>{
       return setPokedex(listPokedex)
     }
   },[]);
-  // console.log(listPokedex)
+  
+  // Abaixo a função que remove do home e adiciona no pokedex
   let addToListPokedex;
   const addPokedex = (pokemon,indexPokemon) => {
     let removePkm = [...newListPokemons]; // isso aqui é oque atualiza o local storage
@@ -46,7 +47,8 @@ const Home=()=>{
     setPokedex(addToListPokedex)
     localStorage.setItem("listPokedex",JSON.stringify(addToListPokedex))
     console.log(pokedex)
-  }
+  };
+  // ----------- //////// --------- /////// ------- ///// ---------//////
   return(
   <style.ContainerHome>
     <Header />

@@ -2,12 +2,11 @@ import React from "react"
 import Logo from "./image/pokemon-logo.png"
 import Pokebola from "./image/129-1298368_ref-pokeball.png"
 import { homePage, pokedexPage } from "../../routes/coordinator";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as style  from "./style";  
 
 export const Header = (props) => {
   const navigate = useNavigate()
-
 
   return (
     <style.Header>
