@@ -27,7 +27,7 @@ export const Card = ( {newListPokemons,addPokedex}) => {
           </style.DivBtn>
         </style.Card> 
       )}) 
-     : newListPokemons && newListPokemons.map((poke,index)=>{
+     : newListPokemons && newListPokemons.map((poke,index)=>{ //essa aqui vai ser a primeira exibicao se caso o listPokemon  nao existir...
       return (
         <style.Card 
           key={poke.name}
