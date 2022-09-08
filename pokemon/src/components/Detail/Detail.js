@@ -1,18 +1,14 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { homePage, pokedexPage } from "../../routes/coordinator";
-import { Header, ContainerDetails, ContainerPhotos, Stats } from "./styled";
-import Logo from "../Home/image/pokemon-logo.png"
-import Pokebola from "../Home/image/129-1298368_ref-pokeball.png"
+import { ContainerDetails, ContainerPhotos, Stats } from "./styled";
 import Background from "./images/pngwing.com.png"
-// import PokemonFront from "./images/bubassour.png"
-// import PokemonBack from "./images/bubassour_back.png"
+import { Header } from "../Header/Header";
 
 
 
-const Details=()=>{
-    const navigate=useNavigate();
+
+const Details = () => {
     const [selectPoke, setSelectPoke] = useState({})
 
     const name = useParams();
@@ -32,25 +28,21 @@ const Details=()=>{
     useEffect(() => { getDetailsPoke() }, [])
 
 
-    return(
+    return (
         <>
-    <Header>
-      <img onClick={() => homePage (navigate)} src={Logo}/>
-      <h1>{selectPoke && selectPoke.name}</h1>
-      <div onClick={() => pokedexPage (navigate)}>
-        <img src={Pokebola}/>
-        <p>Pokedex</p>
-      </div>
-    </Header>
+
+            <Header
+                name={selectPoke && selectPoke.name}
+            />
             <ContainerDetails
-            back = {Background}
+                back={Background}
             >
                 <ContainerPhotos>
                     <div>
-                    <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} />
+                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} />
                     </div>
                     <div>
-                    <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} />
+                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} />
                     </div>
                 </ContainerPhotos>
 
@@ -58,18 +50,18 @@ const Details=()=>{
                     <div>
                         <h2>Stats</h2>
                         {
-                        selectPoke.stats && selectPoke.stats.map((stat) => {
-                            return (
-                                <div key={stat.stat.name}>
-                                    <strong> {stat.stat.name}: </strong> <p>{stat.base_stat}</p>
-                                </div>
-                            )
-                        })
-                    }
+                            selectPoke.stats && selectPoke.stats.map((stat) => {
+                                return (
+                                    <div key={stat.stat.name}>
+                                        <strong> {stat.stat.name}: </strong> <p>{stat.base_stat}</p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    
+
                     <div>
-                    <h3>Tipo</h3>
+                        <h3>Tipo</h3>
                         {
                             selectPoke.types && selectPoke.types.map((type) => {
                                 return (
@@ -80,20 +72,21 @@ const Details=()=>{
                             })
                         }
                     </div>
-                   
+
                     <div>
                         <h2>Moves</h2>
                         {
-                            selectPoke.moves && selectPoke.moves.map((move,index) => {
-                                if (index <= 3 && selectPoke.moves.length ) {
-                                return (
+                            selectPoke.moves && selectPoke.moves.map((move, index) => {
+                                if (index <= 3 && selectPoke.moves.length) {
+                                    return (
                                         <div key={move.move.name}>
                                             <p> {move.move.name} </p>
                                         </div>
-                                    
 
-                                )}
-                        })
+
+                                    )
+                                }
+                            })
                         }
                     </div>
                 </Stats>

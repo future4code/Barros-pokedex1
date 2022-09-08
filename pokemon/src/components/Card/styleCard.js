@@ -39,7 +39,23 @@ export const Card = styled.div `
     border-radius: 10px;
     text-align: center;
     :hover {
-        border: 1px solid #000;
         box-shadow: 5px 3px 3px #000;
+    }
+
+    @media (max-width: 600px) {
+        width: 150px;
+        min-height: 250px;
+        ${DivBtn}{
+            background-color: transparent;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            ${Button}{
+                background-color: #000;
+                width: 50%;
+                padding: 4px;
+                font-size: 16px;
+            }
+        }
     }
 `

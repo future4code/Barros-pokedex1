@@ -7,8 +7,7 @@ import Pokedex from "../components/Pokedex/Pokedex"
 const Router = () => {
     
   
-    return (
-
+  return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -16,7 +15,7 @@ const Router = () => {
         <Route path={`/detalhes/:name`} element={<Detail/>} />
       </Routes>
     </BrowserRouter>
-    )
-  }
+  )
+}
   
   export default Router;

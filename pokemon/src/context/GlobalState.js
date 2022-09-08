@@ -6,51 +6,48 @@ import Router from "../routes/Router"
 
 
 const GlobalContext = () => {
-    const [pokemons20, setPokemons20] = useState([])
-    const [photosPokemons, setPhotosPokemons] = useState([])
+  const [pokemons20, setPokemons20] = useState([]);
+  const [photosPokemons, setPhotosPokemons] = useState([]);
 
-    function getPokemons() {
-        axios.get("https://pokeapi.co/api/v2/pokemon/").then((res) => {
-            setPokemons20(res.data.results)
-        }).catch((error) => {
-            console.log(error)
+  function getPokemons() {
+    axios.get("https://pokeapi.co/api/v2/pokemon/")
+      .then((res) => {
+        setPokemons20(res.data.results)
+      }).catch((error) => {
+        console.log(error)
+      })
+  };
+
+  let pokemonsList = []
+  function getPhotos() {
+    pokemons20 && pokemons20.forEach((poke) => {
+      axios.get(poke.url)
+        .then((res) => {
+          pokemonsList.push(res.data)
+          if(pokemonsList.length === 20) {
+            console.log('foi')
+            setPhotosPokemons(pokemonsList)
+          }
         })
-    }
+        .catch(() => console.log("Houve um problema!"))
+    })
+  };
+  console.log(photosPokemons)
 
-    let pokemonsList = []
-    function getPhotos() {
-        pokemons20 && pokemons20.forEach((poke) => {
-            axios.get(poke.url).then((res) => {
+  useEffect(() => {
+    getPokemons()
+  }, [])
 
-                pokemonsList.push(res.data)
-
-                if (pokemonsList.length === 20) {
-                    console.log('foi')
-                    setPhotosPokemons(pokemonsList)
-                }
-            }).catch(() => console.log("Houve um problema!"))
-        })
-    }
-
+  if(photosPokemons.length < 20) {
     console.log(photosPokemons)
+    getPhotos()
+  }
 
-    useEffect(() => {
-
-        getPokemons()
-
-    }, [])
-
-    if (photosPokemons.length < 20) {
-        console.log(photosPokemons)
-        getPhotos()
-    }
-
-    return (
-        <PokContext.Provider value={{ pokemons20, photosPokemons }}>
-            <Router />
-        </PokContext.Provider>
-    )
-
+  return (
+    <PokContext.Provider value={{ pokemons20, photosPokemons }}>
+      <Router />
+    </PokContext.Provider>
+  )
 }
 
 export default GlobalContext;
