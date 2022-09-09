@@ -22,7 +22,7 @@ export const Card = ( {newListPokemons,addPokedex}) => {
           <style.Img src={poke.sprites.other.home.front_default}/>
           <style.NamePkm >{poke.name}</style.NamePkm>
           <style.DivBtn>
-            <style.Button onClick={ () => addPokedex(poke,index)}>adicionar</style.Button> 
+            <style.Button onClick={ () => addPokedex(poke,index)}>Adicionar</style.Button> 
             <style.Button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</style.Button>
           </style.DivBtn>
         </style.Card> 
