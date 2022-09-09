@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ContainerDetails, ContainerPhotos, Stats } from "./styled";
+import { ContainerDetails,  Stats } from "./styled";
 import Background from "./images/pngwing.com.png"
 import { Header } from "../Header/Header";
 
@@ -22,7 +22,8 @@ const Details = () => {
             })
 
     };
-    useEffect(() => { getDetailsPoke() }, [])
+    useEffect(() => { getDetailsPoke()},
+     [])
 
 
     return (
@@ -35,10 +36,10 @@ const Details = () => {
             >
                 <Stats>
                     <div>
-                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} />
+                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} alt="imagem pokemon"/>
                     </div>
                     <div>
-                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} />
+                        <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} alt="imagem pokemon"/>
                     </div>
 
                     <div>
@@ -47,7 +48,7 @@ const Details = () => {
                             selectPoke.stats && selectPoke.stats.map((stat) => {
                                 return (
                                     <div key={stat.stat.name}>
-                                        <strong> {stat.stat.name}: </strong> <p>{stat.base_stat}</p>
+                                        <h3> {stat.stat.name}: </h3> <p>{stat.base_stat}</p>
                                     </div>
                                 )
                             })
@@ -55,7 +56,7 @@ const Details = () => {
                     </div>
 
                     <div>
-                        <h3>Tipo</h3>
+                        <h3>Type</h3>
                         {
                             selectPoke.types && selectPoke.types.map((type) => {
                                 return (

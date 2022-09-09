@@ -65,7 +65,7 @@ const Pokedex=()=>{
             <button  onClick={ () => removePokemon(poke,index)}>remover</button>
             <button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</button>
           </div>
-            <img src={poke.sprites.other.home.front_default}/>
+            <img src={poke.sprites.other.home.front_default} alt="Imagem Pokemon"/>
         </CardPokedex> 
       )}) 
     : // aqui é o else  
@@ -84,7 +84,7 @@ const Pokedex=()=>{
               <button onClick={ () => removePokemon(poke,index)}>Remover</button>
               <button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</button>
           </div>
-          <img src={poke.sprites.other.home.front_default}/>
+          <img src={poke.sprites.other.home.front_default} alt="Imagem Pokemon"/>
         </CardPokedex> )})
     } {/* Aqui acaba a verificaçao, se nenhuma for positivo vai renderizar so oque ta abaixo */}
     </Main>
