@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ContainerDetails, ContainerPhotos, Stats } from "./styled";
 import Background from "./images/pngwing.com.png"
 import { Header } from "../Header/Header";
-
-
-
 
 const Details = () => {
     const [selectPoke, setSelectPoke] = useState({})
@@ -30,23 +27,20 @@ const Details = () => {
 
     return (
         <>
-
             <Header
                 name={selectPoke && selectPoke.name}
             />
             <ContainerDetails
                 back={Background}
             >
-                <ContainerPhotos>
+                <Stats>
                     <div>
                         <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} />
                     </div>
                     <div>
                         <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.back_default} />
                     </div>
-                </ContainerPhotos>
 
-                <Stats>
                     <div>
                         <h2>Stats</h2>
                         {

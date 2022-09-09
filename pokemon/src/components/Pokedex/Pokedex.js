@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { homePage, detailPage } from "../../routes/coordinator";
+import { detailPage } from "../../routes/coordinator";
 import { Header } from "../Header/Header";
-import * as style from "../Card/styleCard" 
-
-
-
-
-
+import { ContainerHome, Main, CardPokedex, EmptyList } from "./styled"
 
 const Pokedex=()=>{
+
   const navigate=useNavigate();
   // ABaixo recebe os pokemons do localStorage pokedex
   const [pokemonsPokedex , setPokemonsPokedex] = useState([]); 
@@ -50,10 +46,13 @@ const Pokedex=()=>{
     
   return(
   <>
-    <Header/> 
+    <Header/>
+    <ContainerHome>
+    <Main>
+    {listPokedex.length === 0 && <EmptyList><h1>Sua pokedex está vazia!!!</h1></EmptyList>}
     {listPokedex !== null && listPokedex.length > 0  && pokemonsPokedex.length < 1 ? listPokedex.map((poke,index)=>{
       return (
-        <style.Card 
+        <CardPokedex 
           key={poke.name}
           style={poke.types[0].type.name === "grass" ? {backgroundImage: 'linear-gradient(to bottom  , #84ed6829 20%, #49b675 60%, #005221)'} :
           poke.types[0].type.name === "fire" ? {backgroundImage: 'linear-gradient(to bottom , #ff7f0099 20%, yellow 60%, #ff7f00)'} :
@@ -61,18 +60,18 @@ const Pokedex=()=>{
           poke.types[0].type.name === "normal" ? {backgroundImage: 'linear-gradient(to bottom , #fcf5d629 10%, #b5840d 70%, #000)'}: 
           poke.types[0].type.name === "bug" ? {backgroundImage: 'linear-gradient(to bottom , #78866b29 10%, #fcf5d6 70%, #78866b )'}:{}
         }>
-          <style.Img src={poke.sprites.other.home.front_default}/>
-          <style.NamePkm >{poke.name}</style.NamePkm>
-          <style.DivBtn>
-            <style.Button  onClick={ () => removePokemon(poke,index)}>remover</style.Button>
-            <style.Button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</style.Button>
-          </style.DivBtn>
-        </style.Card> 
+          <div>
+          <h2>{poke.name}</h2>
+            <button  onClick={ () => removePokemon(poke,index)}>remover</button>
+            <button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</button>
+          </div>
+            <img src={poke.sprites.other.home.front_default}/>
+        </CardPokedex> 
       )}) 
     : // aqui é o else  
     pokemonsPokedex.map((poke,index)=>{
       return (
-        <style.Card 
+        <CardPokedex 
           key={poke.name}
           style={poke.types[0].type.name === "grass" ? {backgroundImage: 'linear-gradient(to bottom  , #84ed6829 20%, #49b675 60%, #005221)'} :
           poke.types[0].type.name === "fire" ? {backgroundImage: 'linear-gradient(to bottom , #ff7f0099 20%, yellow 60%, #ff7f00)'} :
@@ -80,18 +79,16 @@ const Pokedex=()=>{
           poke.types[0].type.name === "normal" ? {backgroundImage: 'linear-gradient(to bottom , #fcf5d629 10%, #b5840d 70%, #000)'}: 
           poke.types[0].type.name === "bug" ? {backgroundImage: 'linear-gradient(to bottom , #78866b29 10%, #fcf5d6 70%, #78866b )'}:{}
         }>
-          <style.Img src={poke.sprites.other.home.front_default}/>
-          <style.NamePkm >{poke.name}</style.NamePkm>
-          <style.DivBtn>
-            <style.Button  onClick={ () => removePokemon(poke,index)}>remover</style.Button>
-            <style.Button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</style.Button>
-          </style.DivBtn>
-        </style.Card> )})
+          <div>
+              <h1>{poke.name}</h1>
+              <button onClick={ () => removePokemon(poke,index)}>Remover</button>
+              <button  onClick={ () => detailPage(navigate, poke.name) }>Detalhes</button>
+          </div>
+          <img src={poke.sprites.other.home.front_default}/>
+        </CardPokedex> )})
     } {/* Aqui acaba a verificaçao, se nenhuma for positivo vai renderizar so oque ta abaixo */}
-    <div>
-      <button  onClick={() => homePage (navigate)}>HOME</button>
-      <button  onClick={() => detailPage (navigate)}>DETALHES</button>
-    </div>  
+    </Main>
+    </ContainerHome> 
   </>
   )
 };
