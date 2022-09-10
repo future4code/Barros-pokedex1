@@ -25,21 +25,19 @@ const GlobalContext = () => {
         .then((res) => {
           pokemonsList.push(res.data)
           if(pokemonsList.length === 20) {
-            console.log('foi')
             setPhotosPokemons(pokemonsList)
           }
         })
         .catch(() => console.log("Houve um problema!"))
     })
   };
-  console.log(photosPokemons)
+ 
 
   useEffect(() => {
     getPokemons()
   }, [])
 
   if(photosPokemons.length < 20) {
-    console.log(photosPokemons)
     getPhotos()
   }
 

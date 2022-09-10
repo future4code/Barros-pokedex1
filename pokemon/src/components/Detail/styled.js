@@ -2,21 +2,35 @@ import styled from "styled-components";
 
 export const ContainerDetails = styled.main`
     display: flex;
-    min-height: 100vh;
+    min-height: 120vh;
     background-image: url(${props => props.back});
     background-size: cover;
+    flex-direction: column;
     
     h1{
-        margin: 0;
+        margin: 5%;
+        text-align: center;
+        text-transform: capitalize;
+        &::first-letter {
+            color: #960000;
+        }
+        display: none;
+        @media (max-width: 600px){
+            display: block;
+        }
     }
 
     p{
         text-align: center;
     }
-
+    
+    @media (max-width: 600px){
+        height: 100%;
+    }
 `
 
    export const Stats = styled.section`
+    box-sizing: border-box;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
@@ -28,14 +42,19 @@ export const ContainerDetails = styled.main`
                              "photos1 stats moves "
                              "photos2 stats moves "
                              "photos2 stats moves ";
+    text-align: center;
+    text-transform: capitalize;
 
     @media only screen and (max-width: 700px) {
         grid-template-areas: "photos1 photos2"
             "stats stats"
             "type type"
             "moves moves";
+            gap: 0;
+            padding: 0 5% 35% 5%;
+            row-gap: 3%;
+            max-width: 100%;
     }
-
         div{
            background: rgba( 97, 129, 1, 0.35 );
            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -51,6 +70,9 @@ export const ContainerDetails = styled.main`
 
         div:nth-child(1){
             grid-area: photos1;
+            img {
+                
+            }
             text-align: center;
             max-height: 220px;
         }
@@ -59,6 +81,9 @@ export const ContainerDetails = styled.main`
             grid-area: photos2;
             text-align: center;
             max-height: 200px;
+            strong{
+                text-align: left;
+            }
         }
 
         div:nth-child(3){

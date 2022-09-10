@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import background from "../imagem/pokegen.png"
 
 export const ContainerHome = styled.div `
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
-    background-image:  url(https://media.indiedb.com/images/articles/1/127/126990/auto/pokegen2013050512300022.png);
+    background-image:  url(${background});
     background-repeat: no-repeat;
     background-size: cover;
 ` 
@@ -26,7 +27,9 @@ export const CardPokedex = styled.div`
     height: 200px;
     border-radius: 5%;
     margin-bottom: 3%;
-
+    :hover {
+        transform: scale(1.1);
+    }
     div{
         display: flex;
         flex-direction: column;
@@ -38,10 +41,17 @@ export const CardPokedex = styled.div`
         color: #fff;
         font-size: 16px;
         margin-bottom: 3%;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 2px 5px;
+        :hover {
+            background-color:#292929 ;    
+        }
     }
 
     img{
         max-width: 150px;
+        filter: drop-shadow(12px -5px 4px #12111269);
     }
 `
 
