@@ -23,7 +23,6 @@ export const DivBtn = styled.div `
     justify-content: space-around;
     padding: 5px;
     box-sizing: border-box;
-    background-color: #000;
 `
 export const Img = styled.img `
     width: 100%;
@@ -34,7 +33,6 @@ export const Img = styled.img `
 export const Card = styled.div `
     min-height: 300px;;
     width: 330px;
-    /* width: calc(20% - 12px ); */
     margin: 4px;
     border-radius: 10px;
     text-align: center;

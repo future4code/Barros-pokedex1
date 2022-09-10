@@ -22,6 +22,7 @@ export const Header = styled.header `
     ${Title}{
         font-size: clamp(15px, 25px, 27px );
         color: white;
+        text-transform: capitalize;
     }
 
     ${Div}{
@@ -56,6 +57,7 @@ export const Header = styled.header `
         ${Title}{
             font-size: 25px;
             margin-right: 15%;
+            display: none;
         }
         ${Div} {
             display: flex;
@@ -65,11 +67,13 @@ export const Header = styled.header `
             ${P}{
                 padding: 2% 8%;
                 line-height: 1.7;
+                
             }
             ${Img}{
                 top: 20%;
                 right: 79%;
                 height: 55%;  
+                display: none;
             }
         }
     }

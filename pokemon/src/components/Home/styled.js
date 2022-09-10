@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import background from "../imagem/pokegen.png"
 
 // -- Tudo abaixo faz parte do Component Header - ////////
 // estilizaçao do botao ...
@@ -47,7 +47,7 @@ export const Header = styled.header `
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-
+    
     @media (max-width: 700px) {
 
         ${DivBtn} {
@@ -87,7 +87,7 @@ export const ContainerHome = styled.div `
     display: flex;
     flex-direction: column;
 
-    background-image:  url(https://media.indiedb.com/images/articles/1/127/126990/auto/pokegen2013050512300022.png);
+    background-image:  url(${background});
     background-repeat: no-repeat;
     background-size: cover;
 ` 

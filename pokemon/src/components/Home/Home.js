@@ -13,7 +13,7 @@ const Home=()=>{
   const {photosPokemons} = useContext(PokContext, GlobalContext); // essa variavel é a que recebe os dados da requisicao
   const [newListPokemons , setNewListPokemons] = useState([]); // essa outra é uma que eu uso para atualizar os pokemons na hora de renderizar
   const [pokedex, setPokedex] = useState([]); // essa variavel é a que vai receber os pokemons e atualizar o localStorage da pokedex
-  
+
   // essa aqui abaixo, tbm é pra atualizar os pokemons quando clicar em adicionar
   const listPokemon = JSON.parse(localStorage.getItem("pokemonHome"));
   // Abaixo, recebe os pokemons que estao no pokedex

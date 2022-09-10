@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ContainerDetails,  Stats } from "./styled";
-import Background from "./images/pngwing.com.png"
+import Background from "./images/pngwing.com.webp"
 import { Header } from "../Header/Header";
 
 const Details = () => {
@@ -34,6 +34,7 @@ const Details = () => {
             <ContainerDetails
                 back={Background}
             >
+                <h1 >{selectPoke && selectPoke.name}</h1>
                 <Stats>
                     <div>
                         <img src={selectPoke && selectPoke.sprites && selectPoke.sprites.front_default} alt="imagem pokemon"/>
@@ -48,7 +49,7 @@ const Details = () => {
                             selectPoke.stats && selectPoke.stats.map((stat) => {
                                 return (
                                     <div key={stat.stat.name}>
-                                        <h3> {stat.stat.name}: </h3> <p>{stat.base_stat}</p>
+                                        <strong> {stat.stat.name}: </strong> <p>{stat.base_stat}</p>
                                     </div>
                                 )
                             })
