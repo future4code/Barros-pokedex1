@@ -31,7 +31,7 @@ export const Img = styled.img `
     padding: 10px;
 `
 export const Card = styled.div `
-    min-height: 300px;;
+    min-height: 300px;
     width: 330px;
     margin: 4px;
     border-radius: 10px;
