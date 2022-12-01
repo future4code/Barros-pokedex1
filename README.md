@@ -38,20 +38,20 @@ Dados dos Pokémons foi utilizado a API do [PokéApi](https://pokeapi.co/).
 
 # Página Home:
 
-![](./Img/HomePage.png)
+![](./pokemon/Img/HomePage.png)
 
 # Página Detalhes
 
-![](./Img/DetailPage.png)
+![](./pokemon/Img/DetailPage.png)
 
 # Página Pokedex
 
-![](./Img/PokePage.png)
+![](./pokemon/Img/PokePage.png)
 
 # Página Pokedex Vazia
 
-![](./Img/PokedexVazia.png)
+![](./pokemon/Img/PokedexVazia.png)
 
 # Versão Mobile
 
-![](./Img/Mobile.png)
+![](./pokemon/Img/Mobile.png)
